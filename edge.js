@@ -30,8 +30,9 @@ class Edge {
             stroke(0, 25);
         } else {
             stroke(0, 5);
-            strokeWeight(17);
+            strokeWeight(2);
         }
+        strokeCap(SQUARE);
         line(this.nodeA.body.position.x, this.nodeA.body.position.y, this.nodeB.body.position.x, this.nodeB.body.position.y);
     }
 }

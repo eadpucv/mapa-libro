@@ -19,12 +19,12 @@ class Node {
     let x;
     switch (this.cat) {
       case 'Escuela como obra':
-        this.col = color(255, 72, 0);
+        this.col = color(255, 72, 0, 150);
         this.colo = color(201, 62, 8);
         x = width * 5 / 6 + random(-1, 1);
         break;
       case 'Investigación y creación':
-        this.col = color(94, 67, 67);
+        this.col = color(94, 67, 67, 150);
         this.colo = color(28, 15, 15);
         x = width / 6 + random(-1, 1);
         break;
@@ -42,7 +42,7 @@ class Node {
       sleepThreshold: 60,
       mass: this.w / 10
     };
-    this.body = Bodies.rectangle(x, height * .75 + random(-1, 1), this.s, this.s, options);
+    this.body = Bodies.rectangle(x, height * .70 + random(-1, 1), this.s, this.s, options);
     World.add(world, this.body);
     this.over = false;
   }
@@ -69,7 +69,7 @@ class Node {
       fill(this.col);
     }
     rectMode(CENTER);
-    rect(0, 0, this.s, this.s, 2);
+    rect(0, 0, this.s, this.s, 1);
     pop();
   }
 }
