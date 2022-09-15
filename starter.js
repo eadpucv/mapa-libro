@@ -174,7 +174,7 @@ class Node{
       sleepThreshold: 60,
       mass: this.w/10
     };
-    this.body = Bodies.rectangle(x, height/2 + random(-1, 1), this.s, this.s, options);
+    this.body = Bodies.rectangle(x, height*.66 + random(-1, 1), this.s, this.s, options);
     World.add(world, this.body);
     this.over = false;
   }
