@@ -124,7 +124,16 @@ function displayDetails(c) {
 	fill(80, 95);
   rectMode(CORNER);
 	text(c.title, 0, 30, width, height);
-  print("tocando a "+c.title);
+  
+  fill(150, 30, 0, 150);
+	textFont(sansBold);
+	textSize(16);
+  let authorOffset = 1;
+  for(let i = 0; i < c.author.length; i++){
+    text(c.author[i].toUpperCase(), authorOffset, 20);
+    authorOffset += textWidth(c.author[i].toUpperCase()) + 30;
+  }
+	
 }
 
 class Node{
@@ -149,12 +158,12 @@ class Node{
       case 'Investigación y creación':
         this.col = color(94, 67, 67);
         this.colo = color(28, 15, 15);
-        x = width / 2 + random(-1, 1);
+        x = width / 4 + random(-1, 1);
         break;
       case 'Bordes del oficio':
         this.col = color(242, 239, 230);
         this.colo = color(214, 211, 203)
-        x = width / 4 + random(-1, 1);
+        x = width / 2 + random(-1, 1);
     }
     
     let options = {
