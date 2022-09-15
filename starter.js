@@ -9,7 +9,7 @@
 
 let data; // objeto con datos desde la wiki
 let caps; // arreglo de objetos "capítulos"
-let viz; // objeto canvas p5
+let viz;  // objeto canvas p5
 
 let capsBO, capsEO, capsIC // capítulos separados por eje
 

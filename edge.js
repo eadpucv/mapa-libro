@@ -4,21 +4,21 @@ class Edge{
         this.selected = false;
         this.nodeA = nodeA;
         this.nodeB = nodeB;
-        this.e = null;
+        //this.e = null;
         edges.push(this);
     }
 
     createLink(){
         let options = {
-            label: "spring",
-            length: 100,
+            label: "edge",
+            length: random(50, 200),
             bodyA: this.nodeA.body,
             bodyB: this.nodeB.body,
-            stiffness: 0.99
+            stiffness: 0.01
           }
           // create new spring
           this.e = Constraint.create(options);
-          World.add(world, e);
+          World.add(world, this.e);
           
           //print("connecting "+this.nodeA.title+" - "+history.nodeB.title);
           this.connected = true;
