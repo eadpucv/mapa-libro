@@ -14,13 +14,13 @@ class Node{
       }
       this.cat = o.printouts.Nota[0];
       textFont(sansBold, 14);
-      this.s = 17; // side
+      this.s = 20; // this.title.length - side
       this.over = false;
       let x;
       switch(this.cat){
         case 'Escuela como obra':
-          this.col = color(211, 61, 61);
-          this.colo = color(178, 35, 35);
+          this.col = color(255, 72, 0);
+          this.colo = color(201, 62, 8);
           x = width * 5/6 + random(-1, 1);
           break;
         case 'Investigación y creación':
@@ -36,7 +36,7 @@ class Node{
       
       let options = {
         friction: 0.5,
-        frictionAir: 1,
+        frictionAir: 0.1,
         frictionStatic: 0.9,
         restitution: 0.9,
         sleepThreshold: 60,
@@ -47,7 +47,7 @@ class Node{
       this.over = false;
     }
   
-    render(){
+    display(){
       this.angle = this.body.angle;
       let pos = this.body.position;
       this.x = pos.x;
@@ -61,13 +61,25 @@ class Node{
       translate(pos.x, pos.y);
       rotate(this.angle);
       if(this.over){
+        stroke(204, 37, 8);
+        strokeWeight(3);
         fill(this.colo);
       }else{
+        noStroke();
         fill(this.col);
       }
-      noStroke();
       rectMode(CENTER);
       rect(0, 0, this.s, this.s, 2);
       pop();
+    }
+  }
+
+  function drawNodes(){
+    for(c of caps){
+      c.display();
+      if (mConstraint.body === c.body || c.over) {
+        displayDetails(c);
+        current = c;
+      }
     }
   }
