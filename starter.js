@@ -226,7 +226,7 @@ function connect(objectArray){
 function drawEdges(){
  for(e of edges){
   strokeWeight(17);
-  stroke(0, 30);
+  stroke(0, 10);
   line(e.bodyA.position.x, e.bodyA.position.y, e.bodyB.position.x, e.bodyB.position.y);
  }
 }
