@@ -11,9 +11,12 @@ let data; // objeto con datos desde la wiki
 let caps; // arreglo de objetos "capítulos"
 let viz; // objeto canvas p5
 
+
+let userData, annotations;
+
 let capsBO, capsEO, capsIC // capítulos separados por eje
 
-let edges = [];
+let edges = []; // edges connecting chapters
 let edgesCount = 0;
 let current;
 // typefaces
@@ -34,8 +37,10 @@ let world;
 let boundaries = [];
 
 function preload() {
+  // consulta por las publicaciones del seminario
   let url = "https://wiki.ead.pucv.cl/api.php?action=ask&format=json&query=%5B%5BCategor%C3%ADa%3APublicaci%C3%B3n%5D%5D%5B%5BRevista%3A%3ASeminario%20Internacional%20Formaci%C3%B3n%20y%20Oficio%20en%20Arquitectura%20y%20Dise%C3%B1o%5D%5D%7C%3FAutor%7C%3FNota%7C%3FPalabras%20Clave&utf8=1";
   caps = [];
+  annotations = [];
   capsBO = [];
   capsEO = [];
   capsIC = [];
@@ -43,18 +48,22 @@ function preload() {
   serif = loadFont("fonts/Alegreya-Regular.ttf");
   sans = loadFont("fonts/AlegreyaSans-Light.ttf");
   sansBold = loadFont("fonts/AlegreyaSans-Bold.ttf");
+  // consulta por las observaciones que vinculan las publicaciones
+  let url2 = "https://wiki.ead.pucv.cl/api.php?action=ask&format=json&query=%5B%5BCategor%C3%ADa%3Asfo%5D%5D%7C%3FNota%7C%3FAutor%7C%3FP%C3%A1ginas%20Relacionadas&utf8=1&formatversion=1";
+  userData = loadJSON(url2, gotData, 'jsonp');
 }
+
 
 function gotData(response) {
-  print("gotData");
+  print("gotData!\n"+response+"\n\n");
 }
 
-function buildObjects(response) {
+function buildChapters() {
   // build main array 'caps'
   for (let key in data.query.results) {
     let thisResult = data.query.results[key];
     let title = thisResult.fulltext;
-    print("Building: " + title);
+    print("construyendo: " + title);
     let o = new Node(thisResult);
     caps.push(o);
   }
@@ -74,6 +83,17 @@ function buildObjects(response) {
   }
 }
 
+function buildAnnotations() {
+  // build main array 'annotations'
+  for (let key in userData.query.results) {
+    let nota = userData.query.results[key];
+    let title = nota.fulltext;
+    print("Nota: " + title);
+    let o = new Annotation(nota);
+    annotations.push(o);
+  }
+}
+
 function setup() {
   //let w = document.getElementById("p5").offsetWidth;
   viz = createCanvas(windowWidth, windowHeight);
@@ -84,10 +104,7 @@ function setup() {
   engine.world.gravity.y = 0;
 
   createConstraints();
-  buildObjects();
-  createAllEdges(capsBO);
-  createAllEdges(capsEO);
-  createAllEdges(capsIC);
+  buildChapters();
 
   print("se contectaron los capítulos por eje, total = " + edges.length + " conexiones en total");
   shuffle(edges, true);
@@ -98,6 +115,7 @@ function draw() {
   clear();
   drawEdges();
   drawNodes();
+  drawAnnotations();
 
   if (mConstraint.body) {
     let pos = mConstraint.body.position;
@@ -114,9 +132,16 @@ function draw() {
     mConstraint.constraint.bodyB = null;
   }
 
-  if (edgesCount < edges.length /* && frameCount % 5 === 0 */ ) {
-    // print("Creando el vínculo nº"+edgesCount+" de un total de "+ edges.length);
-    edges[edgesCount].createLink();
+  // create links of primary edges
+  if (edgesCount < edges.length && frameCount > 100) {
+    let options = {
+        label: "edge",
+        length: random(80, 120),
+        bodyA: edges[edgesCount].nodeA.body,
+        bodyB: edges[edgesCount].nodeB.body,
+        stiffness: 0.01
+    }
+    edges[edgesCount].createLink(options);
     edgesCount++;
   }
 }
@@ -135,7 +160,7 @@ function displayDetails(c) {
   textSize(12);
   text("doble click para ver", width / 2, height - 18);
 
-  fill(150, 30, 0, 150);
+  fill(255, 72, 0, 150);
   textFont(sansBold);
   textSize(16);
   textAlign(LEFT);
@@ -171,4 +196,22 @@ function createConstraints() {
 
 function doubleClicked() {
   window.open(current.url, '_blank');
+}
+
+
+function keyTyped(){
+
+  if(key === '1'){
+    createAllEdges(capsIC);
+
+  }
+  if(key === '2'){
+    createAllEdges(capsBO);
+  }
+  if(key === '3'){
+    createAllEdges(capsEO); 
+  }
+  if(key === 'n'){
+    buildAnnotations();
+  }
 }

@@ -8,18 +8,10 @@ class Edge {
         edges.push(this);
     }
 
-    createLink() {
-        let options = {
-            label: "edge",
-            length: random(50, 200),
-            bodyA: this.nodeA.body,
-            bodyB: this.nodeB.body,
-            stiffness: 0.001
-        }
+    createLink(options) {
         // create new spring
         this.e = Constraint.create(options);
         World.add(world, this.e);
-
         //print("connecting "+this.nodeA.title+" - "+history.nodeB.title);
         this.connected = true;
     }
@@ -29,7 +21,7 @@ class Edge {
             strokeWeight(22);
             stroke(0, 25);
         } else {
-            stroke(0, 5);
+            stroke(0, 15);
             strokeWeight(2);
         }
         strokeCap(SQUARE);
@@ -38,6 +30,20 @@ class Edge {
 }
 
 function createAllEdges(objectArray) {
+
+      // create links of primary edges
+  if (edgesCount < edges.length && frameCount > 100) {
+    let options = {
+        label: "edge",
+        length: random(80, 120),
+        bodyA: edges[edgesCount].nodeA.body,
+        bodyB: edges[edgesCount].nodeB.body,
+        stiffness: 0.01
+    }
+    edges[edgesCount].createLink(options);
+    edgesCount++;
+  }
+
     for (let i = 0; i < objectArray.length; i++) {
         for (let j = 0; j < i; j++) {
             // create Edge object
@@ -45,6 +51,11 @@ function createAllEdges(objectArray) {
             edges.push(e);
         }
     }
+}
+
+function creatEdgeBetween(a, b) {
+    let e = new Edge(a, b);
+    edges.push(e);
 }
 
 function drawEdges() {
