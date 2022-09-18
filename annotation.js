@@ -46,12 +46,12 @@ class Annotation {
                 
                 let edgeOptions = {
                     label: "spring",
-                    length: 10,
-                    stiffness: 0.31,
+                    length: 1,
+                    stiffness: 0.9,
                     bodyA: this.body,
                     bodyB: caps[i].body
                 }
-
+                // crea el vértice con opciones diferentes al arreglo principaln
                 e.createLink(edgeOptions);
                 }
             }
@@ -64,21 +64,23 @@ class Annotation {
         this.y = pos.y;
         if (dist(this.x, this.y, mouseX, mouseY) < this.side / 2) {
             this.over = true;
-            // for(e in this.myEdges){
-            //     e.selected = true;
-            // }
+            for(let i = 0; i < this.myEdges.length; i++){
+                this.myEdges[i].selected = true;
+                this.connected[i].col = color(0);
+            }
         } else {
             this.over = false;
-            // for(e in this.myEdges){
-            //     e.selected = false;
-            // }
+            for(let i = 0; i < this.myEdges.length; i++){
+                this.myEdges[i].selected = false;
+                this.connected[i].col = this.connected[i].colOriginal;
+            }
         }
         push();
         translate(pos.x, pos.y);
         if (this.over) {
-            stroke(204, 37, 8);
-            strokeWeight(3);
-            fill(100);
+            stroke(0);
+            strokeWeight(2);
+            fill(0);
         } else {
             stroke(0, 90);
             strokeWeight(.5);
@@ -105,7 +107,7 @@ function drawAnnotations() {2
     for (n of obs) {
         n.display();
         if (mConstraint.body === n.body || n.over) {
-            displayDetails(n);
+            displayNote(n);
             current = n;
         }
     }

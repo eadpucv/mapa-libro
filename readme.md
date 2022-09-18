@@ -1,8 +1,8 @@
-# Mapa del Libro ~ S70
+# Mapa del Libro ~ Formación y Oficio en Arquitectura y Diseño
 
-Este repositorio define la visualiación de los capítulos y anotaciones para el libro **"Formación y Oficio en Arquitectura y Diseño"** desplegado durante el [Seminario Internacional Formación y Oficio en Arquitectura y Diseño](https://wiki.ead.pucv.cl/Seminario_Internacional_Formaci%C3%B3n_y_Oficio_en_Arquitectura_y_Dise%C3%B1o) celebrado en Ciudad Abierta entre los dóas 13, 14 y 15 de octubre de 2022.
+Este repositorio define la visualiación de los capítulos y anotaciones –en forma de mapa- para el libro **"Formación y Oficio en Arquitectura y Diseño"** cuyos contenidos son tratados, discutidos y comentados durante el [Seminario Internacional Formación y Oficio en Arquitectura y Diseño](https://wiki.ead.pucv.cl/Seminario_Internacional_Formaci%C3%B3n_y_Oficio_en_Arquitectura_y_Dise%C3%B1o) celebrado en Ciudad Abierta entre los días 13, 14 y 15 de octubre de 2022.
 
-Todos los textos son tomados de las publicaciones semánticas documentadas en [Casiopea](https://wiki.ead.pucv.cl/):
+Todos los textos del mapa son tomados de las publicaciones semánticas documentadas en [Casiopea](https://wiki.ead.pucv.cl/) bajo la forma de:
 
 - **Publicaciones**:Representan los capítulos inéditos (hasta ese momento) que se presentan como ponencias durante el seminario. Para que este mapa los incluya, deben definir los campos:
  - *Revista*: "Seminario Internacional Formación y Oficio en Arquitectura y Diseño"
@@ -47,22 +47,6 @@ https://wiki.ead.pucv.cl/api.php?action=ask&format=json&query=%5B%5BCategor%C3%A
 ```
 https://wiki.ead.pucv.cl/api.php?action=ask&format=json&query=%5B%5BCategor%C3%ADa%3AObservaci%C3%B3n%5D%5D%5B%5BPalabras%20Clave%3A%3Asfo%5D%5D%20%7C%3F%20Autor%20%7C%3F%20Nota%20%7C%3F%20P%C3%A1ginas%20Relacionadas&utf8=1&formatversion=latest
 ```
-
-### Clases
-
-- Node
- - title
- - 
-- Edge
-
-
-### Datos
-1. Arreglo de Capítulos:
- - caps
-2. Arreglo de Observaciones:
- - obs
-
-
 
  #### Librerías
  - [P5js](https://p5js.org)

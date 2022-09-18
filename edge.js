@@ -9,10 +9,10 @@ class Edge {
         this.uncreated = true; // todavía no se construye el objeto físico...
     }
 
-    createLink(options) {
+    createLink(specialOptions) {
         if (this.uncreated) {
             // create new spring
-            this.e = Constraint.create(options);
+            this.e = Constraint.create(specialOptions);
             World.add(world, this.e);
             //print("connecting "+this.nodeA.title+" - "+history.nodeB.title);
             this.uncreated = false;
@@ -22,8 +22,8 @@ class Edge {
     createLink() {
         let options = {
             label: "edge",
-            length: random(80, 120),
-            stiffness: 0.01,
+            length: random(90, 110),
+            stiffness: 0.005,
             bodyA: this.nodeA.body,
             bodyB: this.nodeB.body
         }
@@ -42,7 +42,7 @@ class Edge {
             stroke(0, 150);
             strokeWeight(1);
         } else {
-            stroke(0, 90);
+            stroke(0, 40);
             strokeWeight(.5);
         }
         strokeCap(SQUARE);

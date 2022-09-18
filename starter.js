@@ -100,9 +100,9 @@ function setup() {
 
   createConstraints();
   buildChapters();
-
-  //  print("se contectaron los capítulos por eje, total = " + edges.length + " conexiones en total");
-  //  shuffle(edges, true);
+  createAllEdgesBetween(capsIC, primaryEdges);
+  createAllEdgesBetween(capsBO, primaryEdges);
+  createAllEdgesBetween(capsEO, primaryEdges);
 }
 
 function draw() {
@@ -118,27 +118,51 @@ function draw() {
 function displayDetails(c) {
   textFont(serif);
   textSize(48);
+  textLeading(42);
   noStroke();
   textAlign(LEFT, TOP);
   textWrap(WORD);
   fill(80, 120);
   rectMode(CORNER);
-  text(c.title, 0, 30, width, height);
+  text(c.title, 0, 20, width, height);
 
   textAlign(CENTER);
   textSize(12);
   text("doble click para ver", width / 2, height - 18);
 
-  fill(255, 72, 0, 150);
+  fill(255, 72, 0, 230);
   textFont(sansBold);
   textSize(16);
   textAlign(LEFT);
   let authorOffset = 1;
   for (let i = 0; i < c.author.length; i++) {
-    text(c.author[i].toUpperCase(), authorOffset, 20);
+    text(c.author[i].toUpperCase(), authorOffset, 5);
     authorOffset += textWidth(c.author[i].toUpperCase()) + 30;
   }
 }
+
+function displayNote(c) {
+  noStroke();
+  textFont(sans);
+  textSize(18);
+  textLeading(18);
+  textAlign(LEFT, TOP);
+  textWrap(WORD);
+  fill(80,);
+  rectMode(CORNER);
+  text(c.note, 0, 20, width, height);
+  textFont(serif);
+  textAlign(CENTER);
+  textSize(12);
+  text("doble click para ver", width / 2, height - 18);
+
+  fill(255, 72, 0, 230);
+  textFont(sansBold);
+  textSize(16);
+  textAlign(LEFT);
+  text(c.title.toUpperCase(), 0, 5);
+}
+
 
 function createConstraints() {
   /// mouse
@@ -165,21 +189,24 @@ function doubleClicked() {
 
 
 function keyTyped() {
-
-  if (key === '1') {
-    createAllEdgesBetween(capsIC, primaryEdges);
-  }
-  if (key === '2') {
-    createAllEdgesBetween(capsBO, primaryEdges);
-  }
-  if (key === '3') {
-    createAllEdgesBetween(capsEO, primaryEdges);
-  }
   if (key === 'n') {
     buildAnnotations();
   }
 }
 
 function drawMouseConstraint(){
+  if (mConstraint.body) {
+    let pos = mConstraint.body.position;
+    let offset = mConstraint.constraint.pointB;
+    let m = mConstraint.mouse.position;
 
+    // dibuja mientras arrastra
+    strokeWeight(0.5);
+    stroke(0, 30);
+    line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);
+  }
+
+  if (mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height) {
+    mConstraint.constraint.bodyB = null;
+  }
 }

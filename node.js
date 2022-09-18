@@ -18,16 +18,19 @@ class Node {
     let x;
     switch (this.note) {
       case 'Escuela como obra':
-        this.col = color(255, 72, 0, 150);
+        this.colOriginal = color(200, 72, 0, 230);
+        this.col = color(200, 72, 0, 230);
         this.colo = color(201, 62, 8);
         x = width * 5 / 6 + random(-1, 1);
         break;
       case 'Investigación y creación':
-        this.col = color(94, 67, 67, 150);
+        this.colOriginal = color(94, 87, 87, 230);
+        this.col = color(94, 87, 87, 230);
         this.colo = color(28, 15, 15);
         x = width / 6 + random(-1, 1);
         break;
       case 'Bordes del oficio':
+        this.colOriginal = color(242, 239, 230);
         this.col = color(242, 239, 230);
         this.colo = color(214, 211, 203)
         x = width / 2 + random(-1, 1);
@@ -64,7 +67,8 @@ class Node {
       strokeWeight(3);
       fill(this.colo);
     } else {
-      noStroke();
+      stroke(0, 30);
+      strokeWeight(0.5);
       fill(this.col);
     }
     rectMode(CENTER);
