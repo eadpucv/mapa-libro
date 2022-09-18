@@ -1,67 +1,72 @@
 class Edge {
-    constructor(nodeA, nodeB) {
-        this.connected = false;
+    constructor(nodeA, nodeB, edgeArray) {
         this.selected = false;
         this.nodeA = nodeA;
         this.nodeB = nodeB;
-        //this.e = null;
-        edges.push(this);
+        
+        // agrega este elemento al arreglo correspondiente
+        edgeArray.push(this);
+        this.uncreated = true; // todavía no se construye el objeto físico...
     }
 
     createLink(options) {
-        // create new spring
-        this.e = Constraint.create(options);
-        World.add(world, this.e);
-        //print("connecting "+this.nodeA.title+" - "+history.nodeB.title);
-        this.connected = true;
+        if (this.uncreated) {
+            // create new spring
+            this.e = Constraint.create(options);
+            World.add(world, this.e);
+            //print("connecting "+this.nodeA.title+" - "+history.nodeB.title);
+            this.uncreated = false;
+        }
     }
 
+    createLink() {
+        let options = {
+            label: "edge",
+            length: random(80, 120),
+            stiffness: 0.01,
+            bodyA: this.nodeA.body,
+            bodyB: this.nodeB.body
+        }
+
+        if (this.uncreated) {
+            // create new spring
+            this.e = Constraint.create(options);
+            World.add(world, this.e);
+            //print("connecting "+this.nodeA.title+" - "+history.nodeB.title);
+            this.uncreated = false;
+        }
+    }
+    
     display() {
         if (this.selected) {
-            strokeWeight(22);
-            stroke(0, 25);
+            stroke(0, 150);
+            strokeWeight(1);
         } else {
-            stroke(0, 15);
-            strokeWeight(2);
+            stroke(0, 90);
+            strokeWeight(.5);
         }
         strokeCap(SQUARE);
         line(this.nodeA.body.position.x, this.nodeA.body.position.y, this.nodeB.body.position.x, this.nodeB.body.position.y);
     }
 }
 
-function createAllEdges(objectArray) {
-
-      // create links of primary edges
-  if (edgesCount < edges.length && frameCount > 100) {
-    let options = {
-        label: "edge",
-        length: random(80, 120),
-        bodyA: edges[edgesCount].nodeA.body,
-        bodyB: edges[edgesCount].nodeB.body,
-        stiffness: 0.01
-    }
-    edges[edgesCount].createLink(options);
-    edgesCount++;
-  }
-
+function createAllEdgesBetween(objectArray, edgeArray) {
     for (let i = 0; i < objectArray.length; i++) {
         for (let j = 0; j < i; j++) {
             // create Edge object
-            let e = new Edge(objectArray[i], objectArray[j]);
-            edges.push(e);
+            let e = new Edge(objectArray[i], objectArray[j], edgeArray);
+            e.createLink();
         }
     }
 }
 
-function creatEdgeBetween(a, b) {
+function creatEdgeBetween(a, b, edgeArray) {
     let e = new Edge(a, b);
-    edges.push(e);
+    edgeArray.push(e);
 }
 
-function drawEdges() {
-    for (e of edges) {
-        if (e.connected) {
-            e.display();
-        }
+function drawEdges(edgeArray) {
+    for (e of edgeArray) {
+        e.display();
     }
 }

@@ -1,6 +1,5 @@
 /**
- * a node is a representation of a publication in Casiopea
- * 
+ * un Nodo del Mapa
  * 
  */
 
@@ -12,12 +11,12 @@ class Node {
     for (let i = 0; i < o.printouts.Autor.length; i++) {
       this.author.push(o.printouts.Autor[i].fulltext);
     }
-    this.cat = o.printouts.Nota[0];
+    this.note = o.printouts.Nota[0];
     textFont(sansBold, 14);
-    this.s = 20; // this.title.length - side
+    this.side = 20; 
     this.over = false;
     let x;
-    switch (this.cat) {
+    switch (this.note) {
       case 'Escuela como obra':
         this.col = color(255, 72, 0, 150);
         this.colo = color(201, 62, 8);
@@ -40,11 +39,11 @@ class Node {
       frictionStatic: 0.9,
       restitution: 0.9,
       sleepThreshold: 60,
-      mass: this.w / 10
+      mass: 10
     };
-    this.body = Bodies.rectangle(x, height * .70 + random(-1, 1), this.s, this.s, options);
+
+    this.body = Bodies.rectangle(x, height * .70 + random(-1, 1), this.side, this.side, options);
     World.add(world, this.body);
-    this.over = false;
   }
 
   display() {
@@ -52,7 +51,7 @@ class Node {
     let pos = this.body.position;
     this.x = pos.x;
     this.y = pos.y;
-    if (dist(this.x, this.y, mouseX, mouseY) < this.s / 2) {
+    if (dist(this.x, this.y, mouseX, mouseY) < this.side / 2) {
       this.over = true;
     } else {
       this.over = false;
@@ -69,12 +68,12 @@ class Node {
       fill(this.col);
     }
     rectMode(CENTER);
-    rect(0, 0, this.s, this.s, 1);
+    rect(0, 0, this.side, this.side, 1);
     pop();
   }
 }
 
-function drawNodes() {
+function drawChapters() {
   for (c of caps) {
     c.display();
     if (mConstraint.body === c.body || c.over) {

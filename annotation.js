@@ -1,5 +1,5 @@
 /**
- * a annotation is a representation of a observation 
+ * a annotation is a representation of a result 
  * that connects 2 or more pages in Casiopea
  * 
  */
@@ -8,13 +8,14 @@ class Annotation {
     constructor(o) {
         this.title = o.fulltext;
         this.url = o.fullurl;
+        this.note = o.printouts.Nota[0];
+        this.side = 10;
+        this.over = false;
+        this.myEdges = [];
         this.author = [];
         for (let i = 0; i < o.printouts.Autor.length; i++) {
-            this.author.push(o.printouts.Autor[i].fulltext);
+          this.author.push(o.printouts.Autor[i].fulltext);
         }
-        this.text = o.printouts.Nota[0];
-        this.diam = 10;
-        this.connections = o.printouts["Páginas Relacionadas"];
 
         // crea el cuerpo físico de la observación
         let options = {
@@ -26,26 +27,34 @@ class Annotation {
             mass: this.w / 10
         };
 
-        this.body = Bodies.circle(width / 2 + random(-2, 2), height / 2 + random(-2, 2), this.diam, options);
+        this.body = Bodies.rectangle(width / 2 + random(-2, 2), height / 2 + random(-2, 2), this.side, this.side, options);
         World.add(world, this.body);
-        this.over = false;
         
-        this.connect = [];
-        
-        for (let i = 0; i < this.connections.length; i++) {
-            let t = this.connections[i].fulltext;
-            this.connect.push(t);
-        }
+        this.connectedNames = o.printouts["Páginas Relacionadas"];
+        this.connected = [];
 
-        print(this.connect);
-        
-        for(let i = 0; i < this.connect.length; i++){
-            for (c of caps) {
-                if(c.title === this.connect[i]){
-                    print("* -- * "+c.title+"--- es igual a ---"+this.connect[i]);
+        for (let i = 0; i < this.connectedNames.length; i++) {
+            let t = this.connectedNames[i].fulltext;
+            for(let i = 0; i < caps.length; i++){
+                if(caps[i].title === t){
+                print("iguales!!");
+                this.connected.push(caps[i]);
+
+                // crea el vértice con los capítulos conectados
+                let e = new Edge(this, caps[i], annotationEdges);
+                this.myEdges.push(e);
+                
+                let edgeOptions = {
+                    label: "spring",
+                    length: 10,
+                    stiffness: 0.31,
+                    bodyA: this.body,
+                    bodyB: caps[i].body
                 }
-                let spring = new Edge(this, c);
-              }
+
+                e.createLink(edgeOptions);
+                }
+            }
         }
     }
 
@@ -53,10 +62,16 @@ class Annotation {
         let pos = this.body.position;
         this.x = pos.x;
         this.y = pos.y;
-        if (dist(this.x, this.y, mouseX, mouseY) < this.s / 2) {
+        if (dist(this.x, this.y, mouseX, mouseY) < this.side / 2) {
             this.over = true;
+            // for(e in this.myEdges){
+            //     e.selected = true;
+            // }
         } else {
             this.over = false;
+            // for(e in this.myEdges){
+            //     e.selected = false;
+            // }
         }
         push();
         translate(pos.x, pos.y);
@@ -65,20 +80,33 @@ class Annotation {
             strokeWeight(3);
             fill(100);
         } else {
-            noStroke();
-            fill(200, 100, 100);
+            stroke(0, 90);
+            strokeWeight(.5);
+            fill(230);
         }
-        circle(0, 0, this.diam);
+        rectMode(CENTER);
+        rect(0, 0, this.side, this.side);
         pop();
     }
 }
 
-function drawAnnotations() {
-    for (n of annotations) {
+function buildAnnotations() {
+    // build main array 'obs'
+    for (let key in obsData.query.results) {
+        let result = obsData.query.results[key];
+        console.log(result);
+        let o = new Annotation(result);
+        obs.push(o);
+        print(result.fulltext);
+    }
+}
+
+function drawAnnotations() {2
+    for (n of obs) {
         n.display();
-        if (mConstraint.body === c.body || c.over) {
-            displayDetails(c);
-            current = c;
+        if (mConstraint.body === n.body || n.over) {
+            displayDetails(n);
+            current = n;
         }
     }
 }
