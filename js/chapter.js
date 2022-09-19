@@ -3,7 +3,7 @@
  * 
  */
 
-class Node {
+class Chapter {
   constructor(o) {
     this.title = o.fulltext;
     this.url = o.fullurl;

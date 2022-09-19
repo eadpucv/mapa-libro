@@ -37,7 +37,7 @@ class Annotation {
             let t = this.connectedNames[i].fulltext;
             for(let i = 0; i < caps.length; i++){
                 if(caps[i].title === t){
-                print("iguales!!");
+                // print("iguales!!");
                 this.connected.push(caps[i]);
 
                 // crea el vértice con los capítulos conectados

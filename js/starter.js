@@ -61,7 +61,7 @@ function preload() {
 }
 
 function gotData(response) {
-  print("gotData!\n" + response + "\n\n");
+  print("gotData!");
 }
 
 function buildChapters() {
@@ -70,7 +70,7 @@ function buildChapters() {
     let thisResult = capsData.query.results[key];
     let title = thisResult.fulltext;
     print("construyendo: " + title);
-    let o = new Node(thisResult);
+    let o = new Chapter(thisResult);
     caps.push(o);
   }
   // build secondary arrays
