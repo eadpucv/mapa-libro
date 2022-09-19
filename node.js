@@ -81,7 +81,7 @@ function drawChapters() {
   for (c of caps) {
     c.display();
     if (mConstraint.body === c.body || c.over) {
-      displayDetails(c);
+      displayCapDetails(c);
       current = c;
     }
   }

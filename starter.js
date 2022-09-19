@@ -105,6 +105,17 @@ function setup() {
   createAllEdgesBetween(capsEO, primaryEdges);
 }
 
+function windowResized() {
+	caps = [];
+	obs = [];
+  primaryEdges = [];
+  annotationEdges = [];
+  capsBO = [];
+  capsEO = [];
+  capsIC = [];
+	setup();
+}
+
 function draw() {
   Engine.update(engine);
   clear();
@@ -115,7 +126,7 @@ function draw() {
   drawMouseConstraint();
 }
 
-function displayDetails(c) {
+function displayCapDetails(c) {
   textFont(serif);
   textSize(48);
   textLeading(42);
@@ -150,7 +161,7 @@ function displayNote(c) {
   textWrap(WORD);
   fill(80,);
   rectMode(CORNER);
-  text(c.note, 0, 20, width, height);
+  text(c.note, 0, 30, 320, height);
   textFont(serif);
   textAlign(CENTER);
   textSize(12);
