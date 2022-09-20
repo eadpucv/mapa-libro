@@ -9,7 +9,7 @@ class Edge {
         this.uncreated = true; // todavía no se construye el objeto físico...
     }
 
-    createLink(specialOptions) {
+    createLinkWith(specialOptions) {
         if (this.uncreated) {
             // create new spring
             this.e = Constraint.create(specialOptions);

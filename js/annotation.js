@@ -46,13 +46,13 @@ class Annotation {
                 
                 let edgeOptions = {
                     label: "spring",
-                    length: 1,
-                    stiffness: 0.9,
+                    length: random(70, 80),
+                    stiffness: 0.333,
                     bodyA: this.body,
                     bodyB: caps[i].body
                 }
                 // crea el vértice con opciones diferentes al arreglo principaln
-                e.createLink(edgeOptions);
+                e.createLinkWith(edgeOptions);
                 }
             }
         }
@@ -66,13 +66,16 @@ class Annotation {
             this.over = true;
             for(let i = 0; i < this.myEdges.length; i++){
                 this.myEdges[i].selected = true;
-                this.connected[i].col = color(0);
+                // this.connected[i].col = color(0);
+                rectMode(CENTER);
+                fill(0);
+                rect(this.connected[i].x, this.connected[i].y, this.connected[i].side, this.connected[i].side);
             }
         } else {
             this.over = false;
             for(let i = 0; i < this.myEdges.length; i++){
                 this.myEdges[i].selected = false;
-                this.connected[i].col = this.connected[i].colOriginal;
+                // this.connected[i].col = this.connected[i].colOriginal;
             }
         }
         push();
