@@ -186,6 +186,10 @@ function createConstraints() {
     length: 0.01
   };
   mConstraint = MouseConstraint.create(engine, options);
+  // no captura el scroll, como lo hace de forma predereminada
+  
+  mConstraint.mouse.element.removeEventListener("mousewheel", mConstraint.mouse.mousewheel);
+  mConstraint.mouse.element.removeEventListener("DOMMouseScroll", mConstraint.mouse.mousewheel);
   World.add(world, mConstraint);
   let thickness = 500; // limits
   boundaries.push(new Boundary(width / 2, 0 - thickness / 2, width * 2, thickness, 0)); // top
