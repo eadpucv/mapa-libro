@@ -56,7 +56,7 @@ La Consulta por los capítulos construye los nodos principales y la consulta por
 
 Los vínculos entre capítulos se define por el criterio del *eje al cual se adcribe* (que corresponde a una parte del libro) y las observaciones se vinculan libremente a capítulos (a uno o más) modificando, de este modo, la configuración del mapa.
 
-###Archivos
+### Archivos
 - [```starter.js```](js/starter.js) archivo principal que inicializa el mapa
 - [```chapter.js```](js/chapter.js) definición del objeto "Capítulo"
 - [```annotation.js```](js/annotation.js) definición del objeto "Anotación" (u observación)
