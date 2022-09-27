@@ -67,9 +67,13 @@ class Annotation {
             for(let i = 0; i < this.myEdges.length; i++){
                 this.myEdges[i].selected = true;
                 // this.connected[i].col = color(0);
+                push();
+                translate(this.connected[i].x, this.connected[i].y);
+                rotate(this.connected[i].angle);
                 rectMode(CENTER);
                 fill(0);
-                rect(this.connected[i].x, this.connected[i].y, this.connected[i].side, this.connected[i].side);
+                rect(0, 0, this.connected[i].side, this.connected[i].side);
+                pop();
             }
         } else {
             this.over = false;
