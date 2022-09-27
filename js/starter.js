@@ -210,7 +210,7 @@ function doubletap() {
   var now = new Date().getTime();
   var timesince = now - mylatesttap;
   if((timesince < 600) && (timesince > 0)){
-  doubleClicked();
+    window.open(current.url, '_blank');
   }
   mylatesttap = new Date().getTime();
 }
