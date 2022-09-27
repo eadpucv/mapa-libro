@@ -54,7 +54,6 @@ function preload() {
   capsEO = [];
   capsIC = [];
 
-
   // consulta por las observaciones que vinculan las publicaciones1
   let url2 = "https://wiki.ead.pucv.cl/api.php?action=ask&format=json&query=%5B%5BCategor%C3%ADa%3AObservaci%C3%B3n%5D%5D%5B%5BPalabras%20Clave%3A%3Asfo%5D%5D%20%7C%3F%20Autor%20%7C%3F%20Nota%20%7C%3F%20P%C3%A1ginas%20Relacionadas&utf8=1&formatversion=latest";
   obsData = loadJSON(url2, gotData, 'jsonp');
@@ -199,10 +198,26 @@ function createConstraints() {
   boundaries.push(new Boundary(width + thickness / 2, height / 2, thickness, height * 15, 0)); // sides - right
 }
 
+
+
 function doubleClicked() {
   window.open(current.url, '_blank');
 }
 
+var mylatesttap;
+
+function doubletap() {
+  var now = new Date().getTime();
+  var timesince = now - mylatesttap;
+  if((timesince < 600) && (timesince > 0)){
+  doubleClicked();
+  }
+  mylatesttap = new Date().getTime();
+}
+
+function touchStarted() {
+  doubletap();	
+}
 
 function keyTyped() {
   if (key === 'n') {
