@@ -1,5 +1,5 @@
 /**
- *  Mapa del Libro
+ *  Mapa del Libro - 3 conjuntos
  *  Seminario Internacional Formación y Oficio en Arquitectura y Diseño
  *                                                                 2022
  *  ~ hspencer 
@@ -70,6 +70,40 @@ function buildChapters() {
     let title = thisResult.fulltext;
     print("construyendo: " + title);
     let o = new Chapter(thisResult);
+
+    let x;
+
+    switch (o.note) {
+      case 'Escuela como obra':
+        o.colOriginal = color(200, 72, 0, 230);
+        o.col = color(200, 72, 0, 230);
+        o.colo = color(201, 62, 8);
+        x = width * 5 / 6 + random(-1, 1);
+        break;
+      case 'Investigación y creación':
+        o.colOriginal = color(94, 87, 87, 230);
+        o.col = color(94, 87, 87, 230);
+        o.colo = color(28, 15, 15);
+        x = width / 6 + random(-1, 1);
+        break;
+      case 'Bordes del oficio':
+        o.colOriginal = color(242, 239, 230);
+        o.col = color(242, 239, 230);
+        o.colo = color(214, 211, 203)
+        x = width / 2 + random(-1, 1);
+    }
+    
+    let options = {
+      friction: 0.5,
+      frictionAir: 0.9,
+      frictionStatic: 0.9,
+      restitution: 0.9,
+      sleepThreshold: 60,
+      mass: 10
+    };
+
+    o.createBody(x, height * .74 + random(-1, 1), options);
+
     caps.push(o);
   }
   // build secondary arrays
@@ -213,7 +247,7 @@ function touchStarted() {
 function touchEnded(){
   let now = new Date().getTime();
   let timePassed = now - tapTime;
-  if(timePassed > 0 && timePassed < 600){
+  if(timePassed > 0 && timePassed < 300){
     window.open(current.url, '_blank');
   }
 }

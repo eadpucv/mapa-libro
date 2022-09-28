@@ -46,8 +46,8 @@ class Annotation {
                 
                 let edgeOptions = {
                     label: "spring",
-                    length: random(70, 80),
-                    stiffness: 0.333,
+                    length: random(10, 20),
+                    stiffness: 0.001,
                     bodyA: this.body,
                     bodyB: caps[i].body
                 }

@@ -22,8 +22,8 @@ class Edge {
     createLink() {
         let options = {
             label: "edge",
-            length: random(90, 110),
-            stiffness: 0.005,
+            length: random(200, 250),
+            stiffness: 0.003,
             bodyA: this.nodeA.body,
             bodyB: this.nodeB.body
         }
