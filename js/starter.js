@@ -204,19 +204,18 @@ function doubleClicked() {
   window.open(current.url, '_blank');
 }
 
-var mylatesttap;
-
-function doubletap() {
-  var now = new Date().getTime();
-  var timesince = now - mylatesttap;
-  if((timesince < 600) && (timesince > 0)){
-    window.open(current.url, '_blank');
-  }
-  mylatesttap = new Date().getTime();
-}
+let tapTime;
 
 function touchStarted() {
-  doubletap();	
+  tapTime = new Date().getTime();	
+}
+
+function touchEnded(){
+  let now = new Date().getTime();
+  let timePassed = now - tapTime;
+  if(timePassed > 0 && timePassed < 600){
+    window.open(current.url, '_blank');
+  }
 }
 
 function keyTyped() {
