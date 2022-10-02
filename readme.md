@@ -5,7 +5,7 @@ Este repositorio define la visualiación de los capítulos y anotaciones –en f
 
 <p align="center">
 
-![Mapa del Seminario](img/big-map.png)
+![Mapa del Seminario](img/big-map.gif)
 
 </p>
 
