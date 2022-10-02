@@ -124,7 +124,7 @@ function buildChapters() {
 
 function setup() {
     //let w = document.getElementById("p5").offsetWidth;
-    mapa = createCanvas(windowWidth, windowHeight);
+    mapa = createCanvas(windowWidth - 10, windowHeight);
     mapa.parent('p5js');
 
     engine = Engine.create();
