@@ -2,7 +2,13 @@
 
 Este repositorio define la visualiación de los capítulos y anotaciones –en forma de mapa- para el libro **"Formación y Oficio en Arquitectura y Diseño"** cuyos contenidos son tratados, discutidos y comentados durante el [Seminario Internacional Formación y Oficio en Arquitectura y Diseño](https://wiki.ead.pucv.cl/Seminario_Internacional_Formaci%C3%B3n_y_Oficio_en_Arquitectura_y_Dise%C3%B1o) celebrado en Ciudad Abierta entre los días 13, 14 y 15 de octubre de 2022.
 
+
+<p align="center">
+
 ![Seminario](img/70ans.png)
+
+</p>
+
 
 Todos los textos del mapa son tomados de las publicaciones semánticas documentadas en [Casiopea](https://wiki.ead.pucv.cl/) bajo la forma de:
 
