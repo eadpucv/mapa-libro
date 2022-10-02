@@ -6,13 +6,18 @@ html, body {
   padding: 0;
   font-family: 'Alegreya', serif;
   font-size: 16px;
-  overflow: scroll;
-  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: right;
 }
 
 canvas {
   display: block;
-  height: 100%;
+}
+
+#p5js{
+  align-self: baseline;
 }
 
 #p5_loading {
