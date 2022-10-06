@@ -136,8 +136,11 @@ function setup() {
     //let w = document.getElementById("p5").offsetWidth;
     mapa = createCanvas(768, 512);
     mapa.parent('p5js');
+
     mapa.id('fs');
     elem = document.getElementById('fs');
+    
+    mapa.class('flex-item');
     engine = Engine.create();
     world = engine.world;
     engine.world.gravity.y = 0;
