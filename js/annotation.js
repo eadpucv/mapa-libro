@@ -1,6 +1,6 @@
 /**
- * a annotation is a representation of a result 
- * that connects 2 or more pages in Casiopea
+ * a annotation is a representation of an observation from Casiopea 
+ * that connects 1 or more chapters
  * 
  */
 
@@ -9,7 +9,7 @@ class Annotation {
         this.title = o.fulltext;
         this.url = o.fullurl;
         this.note = o.printouts.Nota[0];
-        this.side = 10;
+        this.side = 15;
         this.over = false;
         this.myEdges = [];
         this.author = [];
@@ -21,13 +21,13 @@ class Annotation {
         let options = {
             friction: 0.5,
             frictionAir: 0.9,
-            frictionStatic: 0.9,
+            frictionStatic: 0.19,
             restitution: 0.9,
-            sleepThreshold: 60,
+            sleepThreshold: 10,
             mass: this.w / 10
         };
 
-        this.body = Bodies.rectangle(width / 2 + random(-2, 2), height / 2 + random(-2, 2), this.side, this.side, options);
+        this.body = Bodies.circle(width / 2 + random(-2, 2), height / 2 + random(-2, 2), this.side, options);
         World.add(world, this.body);
         
         this.connectedNames = o.printouts["Páginas Relacionadas"];
@@ -51,6 +51,7 @@ class Annotation {
                     bodyA: this.body,
                     bodyB: caps[i].body
                 }
+
                 // crea el vértice con opciones diferentes al arreglo principaln
                 e.createLinkWith(edgeOptions);
                 }
@@ -90,11 +91,16 @@ class Annotation {
             fill(0);
         } else {
             stroke(0, 90);
-            strokeWeight(.5);
-            fill(230);
+            strokeWeight(1);
+            fill(255);
         }
-        rectMode(CENTER);
-        rect(0, 0, this.side, this.side);
+        circle(0, 0, this.side);
+        // 3 lines
+        let l = this.side/4;
+        let h = l*.7;
+        line(-l, -h, l, -h);
+        line(-l, 0, l, 0);
+        line(-l, h, l, h);
         pop();
     }
 }
@@ -114,8 +120,29 @@ function drawAnnotations() {2
     for (n of obs) {
         n.display();
         if (mConstraint.body === n.body || n.over) {
-            displayNote(n);
+            displayAnnotationDetails(n);
             current = n;
         }
     }
+}
+
+function displayAnnotationDetails(c) {
+    noStroke();
+    textFont(sans);
+    textSize(18);
+    textLeading(18);
+    textAlign(LEFT, TOP);
+    textWrap(WORD);
+    fill(100);
+    rectMode(CORNER);
+    text(c.note, 0, 30, 320, height);
+    textFont(serif);
+    textAlign(CENTER);
+    textSize(12);
+    text("doble click para ver", width / 2, height - 18);
+    fill(255, 72, 0, 230);
+    textFont(sansBold);
+    textSize(16);
+    textAlign(LEFT);
+    text(c.title.toUpperCase(), 0, 5);
 }

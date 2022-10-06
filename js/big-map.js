@@ -78,7 +78,7 @@ function buildChapters() {
                 o.colOriginal = color(200, 72, 0, 230);
                 o.col = color(200, 72, 0, 230);
                 o.colo = color(201, 62, 8);
-                x = width *.4 + random(-1, 1);
+                x = width *.333 + random(-1, 1);
                 break;
             case 'Investigación y creación':
                 o.colOriginal = color(94, 87, 87, 230);
@@ -90,7 +90,7 @@ function buildChapters() {
                 o.colOriginal = color(242, 239, 230);
                 o.col = color(242, 239, 230);
                 o.colo = color(214, 211, 203)
-                x = width *.6 + random(-1, 1);
+                x = width *.666 + random(-1, 1);
         }
 
         let options = {
@@ -126,11 +126,9 @@ function setup() {
     //let w = document.getElementById("p5").offsetWidth;
     mapa = createCanvas(windowWidth, windowHeight);
     mapa.parent('p5js');
-
     engine = Engine.create();
     world = engine.world;
     engine.world.gravity.y = 0;
-
     createConstraints();
     buildChapters();
     createAllEdgesBetween(capsIC, primaryEdges);
@@ -160,53 +158,9 @@ function draw() {
     drawMouseConstraint();
 }
 
-function displayCapDetails(c) {
-    textFont(serif);
-    textSize(48);
-    textLeading(42);
-    noStroke();
-    textAlign(LEFT, TOP);
-    textWrap(WORD);
-    fill(80, 120);
-    rectMode(CORNER);
-    text(c.title, 0, 20, width, height);
 
-    textAlign(CENTER);
-    textSize(12);
-    text("doble click para ver", width / 2, height - 18);
 
-    fill(255, 72, 0, 230);
-    textFont(sansBold);
-    textSize(16);
-    textAlign(LEFT);
-    let authorOffset = 1;
-    for (let i = 0; i < c.author.length; i++) {
-        text(c.author[i].toUpperCase(), authorOffset, 5);
-        authorOffset += textWidth(c.author[i].toUpperCase()) + 30;
-    }
-}
 
-function displayNote(c) {
-    noStroke();
-    textFont(sans);
-    textSize(18);
-    textLeading(18);
-    textAlign(LEFT, TOP);
-    textWrap(WORD);
-    fill(80, );
-    rectMode(CORNER);
-    text(c.note, 0, 30, 320, height);
-    textFont(serif);
-    textAlign(CENTER);
-    textSize(12);
-    text("doble click para ver", width / 2, height - 18);
-
-    fill(255, 72, 0, 230);
-    textFont(sansBold);
-    textSize(16);
-    textAlign(LEFT);
-    text(c.title.toUpperCase(), 0, 5);
-}
 
 
 function createConstraints() {
@@ -256,6 +210,9 @@ function touchEnded() {
 function keyTyped() {
     if (key === 's') {
         saveCanvas(mapa, 'mapa-seminario', 'png');
+    }
+    if(key === 'n'){
+        buildAnnotations();
     }
 }
 

@@ -159,54 +159,6 @@ function draw() {
   drawMouseConstraint();
 }
 
-function displayCapDetails(c) {
-  textFont(serif);
-  textSize(48);
-  textLeading(42);
-  noStroke();
-  textAlign(LEFT, TOP);
-  textWrap(WORD);
-  fill(80, 120);
-  rectMode(CORNER);
-  text(c.title, 0, 20, width, height);
-
-  textAlign(CENTER);
-  textSize(12);
-  text("doble click para ver", width / 2, height - 18);
-
-  fill(255, 72, 0, 230);
-  textFont(sansBold);
-  textSize(16);
-  textAlign(LEFT);
-  let authorOffset = 1;
-  for (let i = 0; i < c.author.length; i++) {
-    text(c.author[i].toUpperCase(), authorOffset, 5);
-    authorOffset += textWidth(c.author[i].toUpperCase()) + 30;
-  }
-}
-
-function displayNote(c) {
-  noStroke();
-  textFont(sans);
-  textSize(18);
-  textLeading(18);
-  textAlign(LEFT, TOP);
-  textWrap(WORD);
-  fill(80,);
-  rectMode(CORNER);
-  text(c.note, 0, 30, 320, height);
-  textFont(serif);
-  textAlign(CENTER);
-  textSize(12);
-  text("doble click para ver", width / 2, height - 18);
-
-  fill(255, 72, 0, 230);
-  textFont(sansBold);
-  textSize(16);
-  textAlign(LEFT);
-  text(c.title.toUpperCase(), 0, 5);
-}
-
 
 function createConstraints() {
   /// mouse
