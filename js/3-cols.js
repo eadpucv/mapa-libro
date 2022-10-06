@@ -26,6 +26,11 @@ let current; // elemento actual, seleccionado u "over"
 // typefaces
 let serif, sans, sansBold;
 
+// variables gráficas
+let edgeWeight = 0.75;
+let edgeColor = 230;
+let chapterSize = 20;
+
 // Aliases para Matter.js
 var Engine = Matter.Engine,
   World = Matter.World,
@@ -103,7 +108,6 @@ function buildChapters() {
     };
 
     o.createBody(x, height * .74 + random(-1, 1), options);
-
     caps.push(o);
   }
   // build secondary arrays
@@ -170,6 +174,7 @@ function createConstraints() {
     stiffness: 0.999,
     length: 0.01
   };
+
   mConstraint = MouseConstraint.create(engine, options);
   // no captura el scroll, como lo hace de forma predereminada
   mConstraint.mouse.element.removeEventListener("mousewheel", mConstraint.mouse.mousewheel);
@@ -183,7 +188,6 @@ function createConstraints() {
   boundaries.push(new Boundary(-thickness / 2, height / 2, thickness, height * 15, 0)); // sides - left
   boundaries.push(new Boundary(width + thickness / 2, height / 2, thickness, height * 15, 0)); // sides - right
 }
-
 
 
 function doubleClicked() {

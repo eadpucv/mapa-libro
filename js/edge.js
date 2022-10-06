@@ -39,11 +39,11 @@ class Edge {
     
     display() {
         if (this.selected) {
-            stroke(0, 150);
+            stroke(0);
             strokeWeight(1);
         } else {
-            stroke(0, 40);
-            strokeWeight(.75);
+            stroke(edgeColor);
+            strokeWeight(edgeWeight);
         }
         strokeCap(SQUARE);
         line(this.nodeA.body.position.x, this.nodeA.body.position.y, this.nodeB.body.position.x, this.nodeB.body.position.y);

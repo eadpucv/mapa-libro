@@ -1,5 +1,6 @@
 /**
- *  Mapa del Libro - Gran Mapa
+ *  Mapa del Libro - Gran Pantalla de 768 x 512 pixeles
+ * 
  *  Seminario Internacional Formación y Oficio en Arquitectura y Diseño
  *                                                                 2022
  *  ~ hspencer 
@@ -28,9 +29,9 @@ let serif, sans, sansBold;
 
 // variables gráficas
 
-let edgeWeight = 0.75;
-let edgeColor = 200;
-let chapterSize = 20;
+let edgeWeight = 17;
+let edgeColor = "#00000005";
+let chapterSize = 17;
 
 // Aliases para Matter.js
 var Engine = Matter.Engine,
@@ -48,9 +49,9 @@ let boundaries = [];
 
 function preload() {
     // tipografías
-    serif = loadFont("fonts/Alegreya-Regular.ttf");
-    sans = loadFont("fonts/AlegreyaSans-Light.ttf");
-    sansBold = loadFont("fonts/AlegreyaSans-Bold.ttf");
+    serif = loadFont("../fonts/Alegreya-Regular.ttf");
+    sans = loadFont("../fonts/AlegreyaSans-Light.ttf");
+    sansBold = loadFont("../fonts/AlegreyaSans-Bold.ttf");
 
     // consulta por los capítulos
     let url1 = "https://wiki.ead.pucv.cl/api.php?action=ask&format=json&query=%5B%5BCategor%C3%ADa%3APublicaci%C3%B3n%5D%5D%5B%5BRevista%3A%3ASeminario%20Internacional%20Formaci%C3%B3n%20y%20Oficio%20en%20Arquitectura%20y%20Dise%C3%B1o%5D%5D%20%7C%3F%20Autor%20%7C%3F%20Nota%20%7C%3F%20Palabras%20Clave&utf8=1&formatversion=latest";
@@ -74,7 +75,7 @@ function buildChapters() {
     for (let key in capsData.query.results) {
         let thisResult = capsData.query.results[key];
         let title = thisResult.fulltext;
-        print("construyendo: " + title);
+        // print("construyendo: " + title);
         let o = new Chapter(thisResult);
 
         let x;
@@ -128,10 +129,15 @@ function buildChapters() {
     }
 }
 
+
+var elem;
+
 function setup() {
     //let w = document.getElementById("p5").offsetWidth;
-    mapa = createCanvas(windowWidth, windowHeight);
+    mapa = createCanvas(768, 512);
     mapa.parent('p5js');
+    mapa.id('fs');
+    elem = document.getElementById('fs');
     engine = Engine.create();
     world = engine.world;
     engine.world.gravity.y = 0;
@@ -141,8 +147,13 @@ function setup() {
     createAllEdgesBetween(capsBO, primaryEdges);
     createAllEdgesBetween(capsEO, primaryEdges);
     buildAnnotations();
+
+    let btn = createButton('full screen');
+    btn.position(0, 0);
+    btn.mousePressed(openFullscreen);
 }
 
+/*
 function windowResized() {
     caps = [];
     obs = [];
@@ -153,17 +164,17 @@ function windowResized() {
     capsIC = [];
     setup();
 }
+*/
 
 function draw() {
     Engine.update(engine);
-    clear();
+    background(255);
     drawEdges(primaryEdges);
     drawEdges(annotationEdges);
     drawChapters();
     drawAnnotations();
     drawMouseConstraint();
 }
-
 
 function createConstraints() {
     /// mouse
@@ -190,7 +201,6 @@ function createConstraints() {
 }
 
 
-
 function doubleClicked() {
     window.open(current.url, '_blank');
 }
@@ -213,9 +223,6 @@ function keyTyped() {
     if (key === 's') {
         saveCanvas(mapa, 'mapa-seminario', 'png');
     }
-    if(key === 'n'){
-        buildAnnotations();
-    }
 }
 
 function drawMouseConstraint() {
@@ -234,3 +241,13 @@ function drawMouseConstraint() {
         mConstraint.constraint.bodyB = null;
     }
 }
+
+function openFullscreen() {
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+      elem.msRequestFullscreen();
+    }
+  }

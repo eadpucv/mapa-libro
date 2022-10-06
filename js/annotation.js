@@ -109,7 +109,6 @@ function buildAnnotations() {
     // build main array 'obs'
     for (let key in obsData.query.results) {
         let result = obsData.query.results[key];
-        console.log(result);
         let o = new Annotation(result);
         obs.push(o);
         print(result.fulltext);

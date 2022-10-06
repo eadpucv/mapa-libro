@@ -14,7 +14,7 @@ class Chapter {
     }
     this.note = o.printouts.Nota[0];
     textFont(sansBold, 14);
-    this.side = 20;
+    this.side = chapterSize;
     this.over = false;
     this.col = "gray";
     this.colo = "darkgray";
