@@ -42,9 +42,9 @@ let boundaries = [];
 
 function preload() {
   // tipografías
-  serif = loadFont("fonts/Alegreya-Regular.ttf");
-  sans = loadFont("fonts/AlegreyaSans-Light.ttf");
-  sansBold = loadFont("fonts/AlegreyaSans-Bold.ttf");
+  serif = loadFont("../fonts/Alegreya-Regular.ttf");
+  sans = loadFont("../fonts/AlegreyaSans-Light.ttf");
+  sansBold = loadFont("../fonts/AlegreyaSans-Bold.ttf");
 
   // consulta por los capítulos
   let url1 = "https://wiki.ead.pucv.cl/api.php?action=ask&format=json&query=%5B%5BCategor%C3%ADa%3APublicaci%C3%B3n%5D%5D%5B%5BRevista%3A%3ASeminario%20Internacional%20Formaci%C3%B3n%20y%20Oficio%20en%20Arquitectura%20y%20Dise%C3%B1o%5D%5D%20%7C%3F%20Autor%20%7C%3F%20Nota%20%7C%3F%20Palabras%20Clave&utf8=1&formatversion=latest";

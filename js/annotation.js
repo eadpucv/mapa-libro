@@ -140,7 +140,7 @@ function displayAnnotationDetails(c) {
     textAlign(CENTER);
     textSize(12);
     text("doble click para ver", width / 2, height - 18);
-    fill(255, 72, 0, 230);
+    fill(50);
     textFont(sansBold);
     textSize(16);
     textAlign(LEFT);

@@ -1,5 +1,6 @@
 /**
- * un Nodo del Mapa
+ * 
+ * un nodo del mapa (cuadrado)
  * 
  */
 
@@ -78,9 +79,9 @@ function displayCapDetails(c) {
   textSize(12);
   text("doble click para ver", width / 2, height - 18);
 
-
   textAlign(LEFT);
   let authorOffset = 0;
+  let authorLink = " & ";
   for (let i = 0; i < c.author.length; i++) {
     fill(200, 72, 0, 230);
     textFont(sansBold);
@@ -89,8 +90,8 @@ function displayCapDetails(c) {
     authorOffset += textWidth(c.author[i].toUpperCase());
     if(c.author.length > 1 && i < c.author.length - 1){
       fill(173);
-      text("  +  ", authorOffset, 5);
-      authorOffset += textWidth("  +  ");
+      text(authorLink, authorOffset, 5);
+      authorOffset += textWidth(authorLink);
     }
   }
 }
