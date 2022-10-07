@@ -27,7 +27,6 @@ let current; // elemento actual, seleccionado u "over"
 let serif, sans, sansBold;
 
 // variables gráficas
-
 let edgeWeight = 0.75;
 let edgeColor = 200;
 let chapterSize = 20;

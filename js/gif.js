@@ -17,7 +17,6 @@ let caps = [];
 let obs = [];
 
 // vínculos o "resortes" entre elementos del grafo
-
 let primaryEdges = []; // vínculos entre capítulos del mismo eje 
 let annotationEdges = []; // vínculos definidos por observaciones 
 
@@ -25,6 +24,11 @@ let current; // elemento actual, seleccionado u "over"
 
 // typefaces
 let serif, sans, sansBold;
+
+// variables gráficas
+let edgeWeight = 0.75;
+let edgeColor = 200;
+let chapterSize = 20;
 
 // Aliases para Matter.js
 var Engine = Matter.Engine,
@@ -122,10 +126,18 @@ function buildChapters() {
     }
 }
 
+
+let num, frames;
+
 function setup() {
     //let w = document.getElementById("p5").offsetWidth;
-    mapa = createCanvas(960, 520);
+    mapa = createCanvas(720, 480);
     mapa.parent('p5js');
+
+    frameRate(5);
+
+    num = 0;
+    frames = 50;
 
     engine = Engine.create();
     world = engine.world;
@@ -150,7 +162,7 @@ function windowResized() {
     setup();
 }
 
-let num = 0;
+
 
 function draw() {
     Engine.update(engine);
@@ -161,62 +173,13 @@ function draw() {
     drawAnnotations();
     drawMouseConstraint();
 
-    if(frameCount < 400 && frameCount % 2 === 0){
+    if(num < frames && frameCount % 2 === 0){
         let n = nf(num, 3, 0);
         let filename = "map-gif-"+n;
         saveCanvas(mapa, filename, 'png');
         num++;
     }
 }
-
-function displayCapDetails(c) {
-    textFont(serif);
-    textSize(48);
-    textLeading(42);
-    noStroke();
-    textAlign(LEFT, TOP);
-    textWrap(WORD);
-    fill(80, 120);
-    rectMode(CORNER);
-    text(c.title, 0, 20, width, height);
-
-    textAlign(CENTER);
-    textSize(12);
-   // text("doble click para ver", width / 2, height - 18);
-
-    fill(255, 72, 0, 230);
-    textFont(sansBold);
-    textSize(16);
-    textAlign(LEFT);
-    let authorOffset = 1;
-    for (let i = 0; i < c.author.length; i++) {
-        text(c.author[i].toUpperCase(), authorOffset, 5);
-        authorOffset += textWidth(c.author[i].toUpperCase()) + 30;
-    }
-}
-
-function displayNote(c) {
-    noStroke();
-    textFont(sans);
-    textSize(18);
-    textLeading(18);
-    textAlign(LEFT, TOP);
-    textWrap(WORD);
-    fill(80, );
-    rectMode(CORNER);
-    text(c.note, 0, 30, 320, height);
-    textFont(serif);
-    textAlign(CENTER);
-    textSize(12);
-    text("doble click para ver", width / 2, height - 18);
-
-    fill(255, 72, 0, 230);
-    textFont(sansBold);
-    textSize(16);
-    textAlign(LEFT);
-    text(c.title.toUpperCase(), 0, 5);
-}
-
 
 function createConstraints() {
     /// mouse
