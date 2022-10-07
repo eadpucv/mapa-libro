@@ -126,6 +126,7 @@ function drawAnnotations() {2
 }
 
 function displayAnnotationDetails(c) {
+    velo();
     noStroke();
     textFont(sans);
     textSize(18);
@@ -145,4 +146,12 @@ function displayAnnotationDetails(c) {
     textSize(16);
     textAlign(LEFT);
     text(c.title.toUpperCase(), 0, 5);
+}
+
+
+function velo(){
+    noStroke();
+    fill(255, 200);
+    rectMode(CORNER);
+    rect(0, 0, width, height);
 }
