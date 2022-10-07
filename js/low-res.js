@@ -208,20 +208,6 @@ function doubleClicked() {
     window.open(current.url, '_blank');
 }
 
-let tapTime;
-
-function touchStarted() {
-    tapTime = new Date().getTime();
-}
-
-function touchEnded() {
-    let now = new Date().getTime();
-    let timePassed = now - tapTime;
-    if (timePassed > 0 && timePassed < 300) {
-        window.open(current.url, '_blank');
-    }
-}
-
 function keyTyped() {
     if (key === 's') {
         saveCanvas(mapa, 'mapa-seminario', 'png');

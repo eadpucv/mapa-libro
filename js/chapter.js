@@ -71,12 +71,13 @@ function displayCapDetails(c) {
   noStroke();
   textAlign(LEFT, TOP);
   textWrap(WORD);
-  fill(173);
+  fill(150);
   rectMode(CORNER);
   text(c.title, 0, 20, width, height);
 
   textAlign(CENTER);
   textSize(12);
+  fill(90);
   text("click para ver", width / 2, height - 18);
 
   textAlign(LEFT);

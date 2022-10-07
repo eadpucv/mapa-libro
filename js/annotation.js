@@ -138,6 +138,7 @@ function displayAnnotationDetails(c) {
     textFont(serif);
     textAlign(CENTER);
     textSize(12);
+    fill(90);
     text("click para ver", width / 2, height - 18);
     fill(50);
     textFont(sansBold);

@@ -203,7 +203,7 @@ function touchStarted() {
 function touchEnded(){
   let now = new Date().getTime();
   let timePassed = now - tapTime;
-  if(timePassed > 0 && timePassed < 300){
+  if(timePassed > 0 && timePassed < 600){
     window.open(current.url, '_blank');
   }
 }
