@@ -60,10 +60,18 @@ https://wiki.ead.pucv.cl/api.php?action=ask&format=json&query=%5B%5BCategor%C3%A
 
 La Consulta por los capítulos construye los nodos principales y la consulta por las observaciones construye los nodos secundarios del mapa. 
 
-Los vínculos entre capítulos se define por el criterio del *eje al cual se adcribe* (que corresponde a una parte del libro) y las observaciones se vinculan libremente a capítulos (a uno o más) modificando, de este modo, la configuración del mapa.
+Los vínculos entre capítulos se define por el criterio del *eje al cual se adcribe* (que corresponde a una parte del libro) y las observaciones se vinculan libremente a capítulos (a uno o más) modificando, de este modo, la configuración de furzas que determinan la posición y disposición de los nodos del mapa.
 
 ### Archivos
-- [```starter.js```](js/starter.js) archivo principal que inicializa el mapa
+
+- [```big-map.js```](js/starter.js) archivo principal que inicializa el mapa, accesible desde [aquí](https://hspencer.github.io/s70)
+- [```3-cols.js```](js/starter.js) archivo secundario/alternativo que inicializa 3 columnas, accesible desde [aquí](https://hspencer.github.io/s70/3-cols)
+- [```low-res.js```](js/starter.js) archivo secundario/alternativo que inicializa el mapa optimizado para pantallas de baja resolución, accesible desde [aquí](https://hspencer.github.io/s70/low-res)
+- [```gif.js```](js/starter.js) archivo secundario/alternativo exporta imágenes para la construcción de animaciones, accesible desde [aquí](https://hspencer.github.io/s70/3-cols/gif.html)
+
+**Nota**: las definiciones gráficas generales, como el tamaño de los elementos y grosores de los vértices pueden definirse en los archivos anteriores individualmente.
+
+#### Objetos
 - [```chapter.js```](js/chapter.js) definición del objeto "Capítulo"
 - [```annotation.js```](js/annotation.js) definición del objeto "Anotación" (u observación)
 - [```edge.js```](js/edge.js) definición del objeto vínculo o vértice del grafo
