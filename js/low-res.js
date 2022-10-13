@@ -29,7 +29,7 @@ let serif, sans, sansBold;
 
 // variables gráficas
 let edgeWeight = 2;
-let edgeColor = "#00000099";
+let edgeColor = "#00000011";
 let chapterSize = 17;
 
 // Aliases para Matter.js
