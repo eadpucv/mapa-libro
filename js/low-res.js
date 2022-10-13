@@ -28,9 +28,8 @@ let current; // elemento actual, seleccionado u "over"
 let serif, sans, sansBold;
 
 // variables gráficas
-
-let edgeWeight = 17;
-let edgeColor = "#00000005";
+let edgeWeight = 2;
+let edgeColor = "#00000099";
 let chapterSize = 17;
 
 // Aliases para Matter.js
